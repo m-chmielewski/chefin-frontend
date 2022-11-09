@@ -1,0 +1,9 @@
+.page-content {
+ display: flex;
+ flex-direction: column;
+ gap: 1rem;
+ min-height: calc(100vh - 6.24em);
+ max-width: 800px;
+ margin: 0 auto;
+ padding: 1rem 0;
+}

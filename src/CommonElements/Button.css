@@ -1,0 +1,40 @@
+.btn:hover {
+ opacity: 0.5;
+ transition: 0.3s ease;
+}
+
+.btn {
+ color: inherit;
+ font-weight: inherit;
+ font-family: inherit;
+ font-size: inherit;
+ padding: 0.25rem 1rem;
+ border: 2px solid transparent;
+ border-radius: 0.25rem;
+ text-align: center;
+ cursor: pointer;
+}
+
+.btn.nav {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ background-color: var(--bg-1);
+}
+
+.btn.neutral {
+ background-color: var(--blue);
+}
+
+.btn.positive {
+ background-color: var(--green);
+}
+
+.btn.negative {
+ background-color: var(--red);
+}
+
+.btn.inactive {
+ pointer-events: none;
+ opacity: 0.5;
+}

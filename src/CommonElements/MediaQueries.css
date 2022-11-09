@@ -1,0 +1,37 @@
+@media (max-width: 380px) {
+ nav > .menu {
+  display: none;
+ }
+
+ .hamburger-btn {
+  display: flex;
+ }
+
+ body {
+  margin: 0 10px;
+ }
+}
+
+@media (min-width: 381px) {
+ nav > .menu {
+  display: flex;
+ }
+
+ .hamburger-btn {
+  display: none;
+ }
+
+ .hamburger-menu {
+  display: none !important;
+ }
+
+ body {
+  margin: 0 5px;
+ }
+}
+
+@media (min-width: 500px) {
+ body {
+  margin: 0 40px;
+ }
+}

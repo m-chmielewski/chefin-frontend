@@ -1,0 +1,58 @@
+.horizontal-ruler {
+ height: 0.1px;
+ width: 100vw;
+ position: absolute;
+ /* top: 50vh; */
+ background-color: white;
+}
+
+:root {
+ --bg: #0c0c1e;
+ --bg-1: #151535;
+ --white: #fdfffc;
+ --blue: #32327d;
+ --green: #3b6d37;
+ --red: #bb2901;
+}
+
+* {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ word-wrap: break-word;
+}
+
+html {
+ background-color: var(--bg);
+ color: var(--white);
+ font-family: "Montserrat";
+ font-weight: 100;
+ margin: 0;
+ font-size: 12pt;
+}
+
+h1,
+h2,
+h3 {
+ font-weight: 100;
+}
+
+.low-vision h2 {
+ font-size: 1.1rem;
+ font-weight: 200;
+}
+
+.low-vision h3 {
+ font-size: 1rem;
+}
+
+a {
+ text-decoration: none;
+ color: inherit;
+ cursor: pointer;
+}
+
+a:hover {
+ opacity: 0.5;
+ transition: 0.3s ease;
+}
