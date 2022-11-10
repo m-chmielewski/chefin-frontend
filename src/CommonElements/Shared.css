@@ -13,6 +13,7 @@
  --blue: #32327d;
  --green: #3b6d37;
  --red: #bb2901;
+ --montserrat-height-surplus: calc(3.5 / 16);
 }
 
 * {
