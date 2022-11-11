@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./AddRecipe.css";
 
@@ -7,10 +7,14 @@ import Card from "../CommonElements/Card";
 import SuggestiveInput from "../CommonElements/SuggestiveInput";
 import Button from "../CommonElements/Button";
 
+let randomIdPrefix; //To stop browsers from making input suggestions
+
 const AddRecipe = () => {
  const [ingredients, setIngredients] = useState([]);
 
- const [backgroundClicked, setBackgroundClicked] = useState();
+ useEffect(() => {
+  randomIdPrefix = Date.now().toString();
+ }, []);
 
  const handleSave = () => {
   setIngredients(current => {
@@ -29,22 +33,8 @@ const AddRecipe = () => {
   });
  };
 
- const handleBackgroundClick = useCallback(event => {
-  console.log(event.target.id);
-  if (event.target.id !== "input" && event.target.id !== "list") {
-   setBackgroundClicked(true);
-  }
- }, []);
-
- const handleListHidden = () => {
-  setBackgroundClicked(false);
- };
-
  return (
-  <PageContent
-   className="add-recipe"
-   onClick={handleBackgroundClick}
-  >
+  <PageContent className="add-recipe">
    <h1>Add recipe</h1>
    <ul>
     <h2>Ingredients</h2>
@@ -53,9 +43,8 @@ const AddRecipe = () => {
       <li key={index}>
        <Card direction="row">
         <SuggestiveInput
+         id={`${randomIdPrefix}-${index}`}
          value={ingredient.name}
-         backgroundClicked={backgroundClicked}
-         handleListHidden={handleListHidden}
         />
         <input
          type="number"
