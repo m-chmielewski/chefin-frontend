@@ -19,9 +19,7 @@ const AddRecipe = () => {
 
  const [productsList, setProductsList] = useState();
 
- const [state, setState] = useState();
-
- let category;
+ const [category, setCategory] = useState();
 
  useEffect(() => {
   Axios.get(
@@ -43,7 +41,7 @@ const AddRecipe = () => {
  }, []);
 
  const handleCategoryChange = useCallback(inputData => {
-  category = inputData.value;
+  setCategory(inputData.value);
  }, []);
 
  const handleAdd = () => {
@@ -89,7 +87,7 @@ const AddRecipe = () => {
      }}
     />
     <SuggestiveInput
-     id={`${randomIdPrefix}-${category}`}
+     id={`${randomIdPrefix}-category`}
      value={category}
      options={categories}
      onInputChange={handleCategoryChange}
