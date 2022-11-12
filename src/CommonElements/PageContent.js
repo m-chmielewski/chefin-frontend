@@ -1,15 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "./PageContent.css";
 
-const PageContent = ({ onClick, ...props }) => {
- // useEffect(() => {
- //  const main = document.getElementsByTagName("main")[0];
- //  main.addEventListener("click", event => {
- //   onClick(event);
- //  });
- // }, [onClick]);
-
+const PageContent = props => {
  return (
   <main className={`page-content ${props.className}`}>{props.children}</main>
  );

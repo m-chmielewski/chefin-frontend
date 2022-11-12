@@ -1,1 +1,5 @@
 Copy Settings from shoppin
+
+AddRecipe:
+ -If I am only tabbing without pressing enter or clicking anywhere lists dont disappear
+ -useReducer
