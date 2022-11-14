@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import "./SuggestiveInput.css";
 
-const SuggestiveInput = ({ id, onInputChange, options }) => {
+const SuggestiveInput = ({ id, onInputChange, options, ...props }) => {
  const [inputPhrase, setInputPhrase] = useState("");
 
  const [listDown, setListDown] = useState(false);
@@ -25,6 +25,7 @@ const SuggestiveInput = ({ id, onInputChange, options }) => {
     id={id}
     type="text"
     value={inputPhrase}
+    placeholder={props.placeholder}
     onChange={event => {
      setInputPhrase(event.target.value);
     }}

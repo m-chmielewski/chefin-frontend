@@ -9,6 +9,7 @@
 }
 
 .add-recipe input {
+ flex: 1;
  color: inherit;
  font-family: inherit;
  font-weight: inherit;
@@ -16,4 +17,8 @@
  border: 1px solid rgba(255, 255, 255, 0.1);
  background-color: #151535;
  padding: 0.25rem;
+}
+
+.add-recipe .suggestive-input-wrapper {
+ flex: 1;
 }

@@ -7,19 +7,20 @@ import PageContent from "../CommonElements/PageContent";
 import Card from "../CommonElements/Card";
 import SuggestiveInput from "../CommonElements/SuggestiveInput";
 import Button from "../CommonElements/Button";
+import AddItemButton from "../CommonElements/AddItemButton";
 
 const randomIdPrefix = Date.now().toString(); //To stop browsers from making input suggestions
 
-const categories = ["Breakfast", "Dinner", "Dessert"];
-
 const AddRecipe = () => {
- const [ingredients, setIngredients] = useState([]);
+ const [ingredients, setIngredients] = useState([{ name: "", quantity: "" }]);
+
+ const [steps, setSteps] = useState([""]);
 
  const [name, setName] = useState("");
 
- const [productsList, setProductsList] = useState();
+ const [reference, setReference] = useState("");
 
- const [category, setCategory] = useState();
+ const [productsList, setProductsList] = useState();
 
  useEffect(() => {
   Axios.get(
@@ -40,10 +41,6 @@ const AddRecipe = () => {
   });
  }, []);
 
- const handleCategoryChange = useCallback(inputData => {
-  setCategory(inputData.value);
- }, []);
-
  const handleAdd = () => {
   setIngredients(current => {
    return [...current, { name: "", quantity: "" }];
@@ -62,17 +59,70 @@ const AddRecipe = () => {
   const recipe = {
    ingredients: ingredients,
    name: name,
-   category: category,
+   steps: steps,
+   reference: reference,
   };
 
-  console.log(recipe);
+  Axios.post(`${process.env.REACT_APP_BACKEND_URL}/recipes/create`, recipe);
  };
+
+ // const handleSubmit = event => {
+ //  event.preventDefault();
+
+ //  setFormState(current => {
+ //   return {
+ //    ...current,
+ //    submitting: true,
+ //    valuesMissing:
+ //     !messageData?.from || !messageData?.subject || !messageData?.body
+ //      ? true
+ //      : false,
+ //   };
+ //  });
+
+ //  if (messageData?.from && messageData?.subject && messageData?.body) {
+ //   Axios.post(
+ //    `${process.env.REACT_APP_BACKEND_URL}/contactMe/`,
+ //    messageData
+ //   ).then(result => {
+ //    if (result.status === 200) {
+ //     setFormState(current => {
+ //      return {
+ //       ...current,
+ //       submittedSuccessfully: true,
+ //      };
+ //     });
+
+ //     setTimeout(() => {
+ //      setFormState(current => {
+ //       return {
+ //        ...current,
+ //        submitting: false,
+ //        submittedSuccessfully: null,
+ //       };
+ //      });
+
+ //      setMessageData(null);
+ //     }, 2000);
+ //    }
+ //   });
+ //  } else {
+ //   setTimeout(() => {
+ //    setFormState(current => {
+ //     return {
+ //      ...current,
+ //      submitting: false,
+ //      valuesMissing: false,
+ //      submittedSuccessfully: null,
+ //     };
+ //    });
+ //   }, 2000);
+ //  }
+ // };
 
  if (!productsList) {
   return <div>Loading...</div>;
  }
-
- console.log("rerender");
 
  return (
   <PageContent className="add-recipe">
@@ -85,12 +135,17 @@ const AddRecipe = () => {
      onChange={event => {
       setName(event.target.value);
      }}
+     placeholder="Name"
     />
-    <SuggestiveInput
-     id={`${randomIdPrefix}-category`}
-     value={category}
-     options={categories}
-     onInputChange={handleCategoryChange}
+   </Card>
+   <Card>
+    <input
+     type="text"
+     value={reference}
+     onChange={event => {
+      setReference(event.target.value);
+     }}
+     placeholder="Reference"
     />
    </Card>
    <ul>
@@ -102,12 +157,14 @@ const AddRecipe = () => {
         <SuggestiveInput
          id={`${randomIdPrefix}-${index}`}
          value={ingredient.name}
+         placeholder="Ingredient"
          options={productsList}
          onInputChange={handleSuggestiveInputChange}
         />
         <input
          type="number"
          value={ingredient.quantity}
+         placeholder="Quantity [g]"
          onChange={event =>
           setIngredients(current => {
            const mutableIngredients = [...current];
@@ -129,12 +186,48 @@ const AddRecipe = () => {
       </li>
      );
     })}
-    <Button
-     variant="neutral"
-     onClick={handleAdd}
-    >
-     Add
-    </Button>
+    <AddItemButton onClick={handleAdd} />
+   </ul>
+   <ul>
+    <h2>Steps</h2>
+    {steps.map((step, index) => {
+     return (
+      <li key={index}>
+       <Card direction="row">
+        <input
+         value={step}
+         placeholder="Step"
+         onChange={event => {
+          setSteps(current => {
+           const mutableSteps = [...current];
+           mutableSteps[index] = event.target.value;
+           return mutableSteps;
+          });
+         }}
+        />
+        <Button
+         variant="negative"
+         onClick={() => {
+          setSteps(current => {
+           const mutableSteps = [...current];
+           mutableSteps.splice(index, 1);
+           return mutableSteps;
+          });
+         }}
+        >
+         Remove
+        </Button>
+       </Card>
+      </li>
+     );
+    })}
+    <AddItemButton
+     onClick={() =>
+      setSteps(current => {
+       return [...current, ""];
+      })
+     }
+    />
    </ul>
    <Button
     variant="neutral"
