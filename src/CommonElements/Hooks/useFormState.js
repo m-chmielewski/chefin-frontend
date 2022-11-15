@@ -9,6 +9,8 @@ export const useFormState = (data, backendURL, validationCriteria) => {
  const handleSubmit = event => {
   event.preventDefault();
 
+  console.log(data);
+
   const formInvalid = validator(data, validationCriteria);
 
   setFormState(current => {

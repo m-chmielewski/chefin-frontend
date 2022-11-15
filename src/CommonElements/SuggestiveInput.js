@@ -10,8 +10,6 @@ const SuggestiveInput = ({
  fieldName,
  ...props
 }) => {
- const [inputPhrase, setInputPhrase] = useState("");
-
  const [listDown, setListDown] = useState(false);
 
  useEffect(() => {
@@ -22,36 +20,31 @@ const SuggestiveInput = ({
   });
  }, [id]);
 
- useEffect(() => {
-  if (groupName && fieldName) {
-   onInputChange(inputPhrase, id.split("-")[1], groupName, fieldName);
-  }
- }, [id, onInputChange, inputPhrase, groupName, fieldName]);
-
  return (
   <div className="suggestive-input-wrapper">
+   <label htmlFor={id}>{props.label}</label>
    <input
     id={id}
     type="text"
-    value={inputPhrase}
+    value={props.value}
     placeholder={props.placeholder}
     onChange={event => {
-     setInputPhrase(event.target.value);
+     onInputChange(event.target.value, id.split("-")[1], groupName, fieldName);
     }}
     onFocus={() => setListDown(true)}
    />
    <ul style={{ display: listDown ? "flex" : "none" }}>
     {options.map(option => {
-     if (option.toLowerCase().startsWith(inputPhrase.toLowerCase()))
+     if (option.toLowerCase().startsWith(props.value.toLowerCase()))
       return (
        <li
         key={option}
         onClick={() => {
-         setInputPhrase(option);
+         onInputChange(option, id.split("-")[1], groupName, fieldName);
         }}
         onKeyDown={event => {
          if (event.key === "Enter") {
-          setInputPhrase(option);
+          onInputChange(option, id.split("-")[1], groupName, fieldName);
           setListDown(false);
          }
         }}

@@ -7,6 +7,7 @@ const AddItemButton = props => {
   <button
    onClick={props.onClick}
    className="add-item-btn"
+   type="button"
   >
    +
   </button>

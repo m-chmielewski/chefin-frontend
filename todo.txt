@@ -1,3 +1,9 @@
+Scroll behavior on quanity fields is annoying
+
+Error handling
+
+validation onblur
+
 Copy Settings from shoppin
 
 I think I need typescript

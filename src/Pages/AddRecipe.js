@@ -58,94 +58,108 @@ const AddRecipe = () => {
   <PageContent className="add-recipe">
    <h1>Add recipe</h1>
    <form onSubmit={event => handleSubmit(event)}>
-    <h2>Name</h2>
-    <Card>
-     <input
-      type="text"
-      value={formData.name}
-      onChange={event => {
-       handleSimpleInputChange("name", event.target.value);
-      }}
-      placeholder="Name"
-     />
-    </Card>
-    <Card>
-     <input
-      type="text"
-      value={formData.reference}
-      onChange={event => {
-       handleSimpleInputChange("reference", event.target.value);
-      }}
-      placeholder="Reference"
-     />
-    </Card>
-    <ul>
-     <h2>Ingredients</h2>
-     {formData.ingredients?.map((ingredient, index) => {
-      return (
-       <li key={index}>
-        <Card direction="row">
-         <SuggestiveInput
-          id={`${randomIdPrefix}-${index}`}
-          value={ingredient.name}
-          placeholder="Ingredient"
-          groupName="ingredients"
-          fieldName="name"
-          options={productsList}
-          onInputChange={handleNestedInputChange}
-         />
-         <input
-          type="number"
-          value={ingredient.quantity || ""}
-          placeholder="Quantity [g]"
-          onChange={event =>
-           handleNestedInputChange(
-            event.target.value,
-            index,
-            "ingredients",
-            "quantity"
-           )
-          }
-         />
-         <Button
-          variant="negative"
-          onClick={() => handleRemoveRow(index, "ingredients")}
-         >
-          Remove
-         </Button>
-        </Card>
-       </li>
-      );
-     })}
-     <AddItemButton onClick={() => handleAddRow("ingredients")} />
-    </ul>
-    <ul>
-     <h2>Steps</h2>
-     {formData.steps?.map((step, index) => {
-      return (
-       <li key={index}>
-        <Card direction="row">
-         <input
-          value={step}
-          placeholder="Step"
-          onChange={event =>
-           handleNestedInputChange(event.target.value, index, "steps")
-          }
-         />
-         <Button
-          variant="negative"
-          onClick={() => {
-           handleRemoveRow(index, "steps");
-          }}
-         >
-          Remove
-         </Button>
-        </Card>
-       </li>
-      );
-     })}
-     <AddItemButton onClick={() => handleAddRow("steps")} />
-    </ul>
+    <fieldset>
+     <legend>General</legend>
+     <Card>
+      <label htmlFor={`${randomIdPrefix}-recipe-name`}>Recipe name</label>
+      <input
+       id={`${randomIdPrefix}-recipe-name`}
+       type="text"
+       value={formData.name}
+       onChange={event => {
+        handleSimpleInputChange("name", event.target.value);
+       }}
+       placeholder="Name"
+      />
+      <label htmlFor={`${randomIdPrefix}-reference`}> Reference recipe</label>
+      <input
+       id={`${randomIdPrefix}-reference`}
+       type="text"
+       value={formData.reference}
+       onChange={event => {
+        handleSimpleInputChange("reference", event.target.value);
+       }}
+       placeholder="Reference"
+      />
+     </Card>
+    </fieldset>
+    <fieldset>
+     <legend>Ingredients</legend>
+     <ul>
+      {formData.ingredients?.map((ingredient, index) => {
+       return (
+        <li key={index}>
+         <Card>
+          <SuggestiveInput
+           id={`${randomIdPrefix}-${index}`}
+           value={ingredient.name}
+           placeholder="Ingredient"
+           label="Ingredient name"
+           groupName="ingredients"
+           fieldName="name"
+           options={productsList}
+           onInputChange={handleNestedInputChange}
+          />
+          <label htmlFor={`${randomIdPrefix}-quantity-${index}`}></label>
+          <input
+           id={`${randomIdPrefix}-quantity-${index}`}
+           type="number"
+           value={ingredient.quantity || ""}
+           placeholder="Quantity [g]"
+           onChange={event =>
+            handleNestedInputChange(
+             event.target.value,
+             index,
+             "ingredients",
+             "quantity"
+            )
+           }
+          />
+          <Button
+           variant="negative"
+           onClick={() => handleRemoveRow(index, "ingredients")}
+          >
+           Remove
+          </Button>
+         </Card>
+        </li>
+       );
+      })}
+      <AddItemButton
+       onClick={() => handleAddRow("ingredients", { name: "", quantity: "" })}
+      />
+     </ul>
+    </fieldset>
+    <fieldset>
+     <legend>Steps</legend>
+     <ul>
+      {formData.steps?.map((step, index) => {
+       return (
+        <li key={index}>
+         <Card direction="row">
+          <label htmlFor={`${randomIdPrefix}-step-${index}`}></label>
+          <input
+           value={step}
+           placeholder="Step"
+           onChange={event =>
+            handleNestedInputChange(event.target.value, index, "steps")
+           }
+          />
+          <Button
+           variant="negative"
+           onClick={() => {
+            handleRemoveRow(index, "steps");
+           }}
+          >
+           Remove
+          </Button>
+         </Card>
+        </li>
+       );
+      })}
+      <AddItemButton onClick={() => handleAddRow("steps", "")} />
+     </ul>
+    </fieldset>
     <SubmitSection formState={formState} />
    </form>
   </PageContent>

@@ -42,12 +42,11 @@ export const useFormData = initialState => {
   []
  );
 
- const handleAddRow = groupName => {
-  const dataType = typeof formData?.[groupName][0];
+ const handleAddRow = (groupName, data) => {
   setFormData(current => {
    return {
     ...current,
-    [groupName]: [...current[groupName], dataType === "string" ? "" : {}],
+    [groupName]: [...current[groupName], data],
    };
   });
  };

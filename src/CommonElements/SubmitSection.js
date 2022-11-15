@@ -8,6 +8,12 @@ import FormAlert from "./FormAlert";
 const SubmitSection = ({ formState }) => {
  return (
   <div className="submit-section-wrapper">
+   {formState?.valuesMissing || formState?.submittedSuccessfully ? (
+    <FormAlert success={formState.submittedSuccessfully}>
+     {formState?.valuesMissing && "Please provide all values"}
+     {formState?.submittedSuccessfully && "Sent successfully"}
+    </FormAlert>
+   ) : null}
    <Button
     variant="neutral"
     inactive={formState?.submitting}
@@ -17,12 +23,6 @@ const SubmitSection = ({ formState }) => {
      ? "Submitting..."
      : "Submit"}
    </Button>
-   {formState?.valuesMissing || formState?.submittedSuccessfully ? (
-    <FormAlert success={formState.submittedSuccessfully}>
-     {formState?.valuesMissing && "Please provide all values"}
-     {formState?.submittedSuccessfully && "Sent successfully"}
-    </FormAlert>
-   ) : null}
   </div>
  );
 };

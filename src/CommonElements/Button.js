@@ -37,6 +37,7 @@ const Button = ({ inactive, ...props }) => {
    {...props}
    onClick={props.onClick}
    className={`btn ${props.variant} ${inactive ? "inactive" : ""}`}
+   type={props.type || "button"}
   >
    {props.children}
   </button>
