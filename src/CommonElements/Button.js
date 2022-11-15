@@ -5,7 +5,7 @@ import "./Button.css";
 
 import Arrow from "./Arrow";
 
-const Button = props => {
+const Button = ({ inactive, ...props }) => {
  if (props.href) {
   if (props.href.startsWith("https://")) {
    return (
@@ -36,7 +36,7 @@ const Button = props => {
   <button
    {...props}
    onClick={props.onClick}
-   className={`btn ${props.variant} ${props.inactive ? "inactive" : ""}`}
+   className={`btn ${props.variant} ${inactive ? "inactive" : ""}`}
   >
    {props.children}
   </button>

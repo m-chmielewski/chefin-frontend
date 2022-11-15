@@ -1,27 +1,26 @@
 import { useState } from "react";
 
-export const useForm = (postToBackend, backendURL) => {
+import { validator } from "../Utils/validator";
+import { postToBackend } from "../Utils/postToBackend";
+
+export const useFormState = (data, backendURL, validationCriteria) => {
  const [formState, setFormState] = useState();
 
  const handleSubmit = event => {
   event.preventDefault();
 
-  let valuesMissing = false;
-
-  Object.values(formState.data).forEach(value => {
-   valuesMissing = valuesMissing || !value;
-  });
+  const formInvalid = validator(data, validationCriteria);
 
   setFormState(current => {
    return {
     ...current,
     submitting: true,
-    valuesMissing: valuesMissing,
+    valuesMissing: formInvalid,
    };
   });
 
-  if (!valuesMissing) {
-   postToBackend(backendURL, formState.data).then(result => {
+  if (!formInvalid) {
+   postToBackend(data, backendURL).then(result => {
     if (result === 200) {
      setFormState(current => {
       return {
