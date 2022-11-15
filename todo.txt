@@ -1,5 +1,9 @@
 Copy Settings from shoppin
 
+I think I need typescript
+
+useContext?
+
 AddRecipe:
  -If I am only tabbing without pressing enter or clicking anywhere lists dont disappear
  -useReducer

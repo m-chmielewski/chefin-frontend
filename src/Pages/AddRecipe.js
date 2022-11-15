@@ -3,6 +3,7 @@ import Axios from "axios";
 
 import "./AddRecipe.css";
 
+import { useForm } from "../CommonElements/Hooks/useForm";
 import PageContent from "../CommonElements/PageContent";
 import Card from "../CommonElements/Card";
 import SuggestiveInput from "../CommonElements/SuggestiveInput";
@@ -12,13 +13,14 @@ import AddItemButton from "../CommonElements/AddItemButton";
 const randomIdPrefix = Date.now().toString(); //To stop browsers from making input suggestions
 
 const AddRecipe = () => {
- const [ingredients, setIngredients] = useState([{ name: "", quantity: "" }]);
+ const [formState, handleSubmit] = useForm();
 
- const [steps, setSteps] = useState([""]);
-
- const [name, setName] = useState("");
-
- const [reference, setReference] = useState("");
+ const [formData, setFormData] = useState({
+  ingredients: [{ name: "", quantity: "" }],
+  steps: [""],
+  name: "",
+  reference: "",
+ });
 
  const [productsList, setProductsList] = useState();
 
@@ -31,94 +33,89 @@ const AddRecipe = () => {
  }, []);
 
  const handleSuggestiveInputChange = useCallback(inputData => {
-  setIngredients(current => {
-   const mutableIngredients = [...current];
+  setFormData(current => {
+   const mutableIngredients = [...current.ingredients];
    mutableIngredients[inputData.index] = {
     name: inputData.value,
-    quantity: current[inputData.index].quantity,
+    quantity: current.ingredients[inputData.index].quantity,
    };
-   return mutableIngredients;
+   return {
+    ...current,
+    ingredients: mutableIngredients,
+   };
   });
  }, []);
 
- const handleAdd = () => {
-  setIngredients(current => {
-   return [...current, { name: "", quantity: "" }];
+ const handleSimpleInputChange = (inputName, value) => {
+  setFormData(current => {
+   return {
+    ...current,
+    [inputName]: value,
+   };
   });
  };
 
- const handleRemove = index => {
-  setIngredients(current => {
-   const mutableIngredients = [...current];
-   mutableIngredients.splice(index, 1);
-   return mutableIngredients;
+ const handleNestedInputChange = useCallback(
+  (value, index, groupName, fieldName) => {
+   if (groupName && !fieldName) {
+    setFormData(current => {
+     const mutableArray = [...current[groupName]];
+     mutableArray[index] = value;
+     return {
+      ...current,
+      [groupName]: mutableArray,
+     };
+    });
+   }
+
+   if (groupName && fieldName) {
+    setFormData(current => {
+     const mutableArray = [...current[groupName]];
+     mutableArray[index] = {
+      ...current[groupName][index],
+      [fieldName]: value,
+     };
+     return {
+      ...current,
+      [groupName]: mutableArray,
+     };
+    });
+   }
+  },
+  []
+ );
+
+ const handleAdd = groupName => {
+  const dataType = typeof formData?.[groupName][0];
+  setFormData(current => {
+   return {
+    ...current,
+    [groupName]: [...current[groupName], dataType === "string" ? "" : {}],
+   };
+  });
+ };
+
+ const handleRemove = (index, groupName) => {
+  setFormData(current => {
+   const mutableArray = [...current[groupName]];
+   mutableArray.splice(index, 1);
+   return {
+    ...current,
+    [groupName]: mutableArray,
+   };
   });
  };
 
  const handleSave = () => {
   const recipe = {
-   ingredients: ingredients,
-   name: name,
-   steps: steps,
-   reference: reference,
+   ingredients: formData.ingredients,
+   name: formData.name,
+   steps: formData.steps,
+   reference: formData.reference,
   };
 
   Axios.post(`${process.env.REACT_APP_BACKEND_URL}/recipes/create`, recipe);
  };
-
- // const handleSubmit = event => {
- //  event.preventDefault();
-
- //  setFormState(current => {
- //   return {
- //    ...current,
- //    submitting: true,
- //    valuesMissing:
- //     !messageData?.from || !messageData?.subject || !messageData?.body
- //      ? true
- //      : false,
- //   };
- //  });
-
- //  if (messageData?.from && messageData?.subject && messageData?.body) {
- //   Axios.post(
- //    `${process.env.REACT_APP_BACKEND_URL}/contactMe/`,
- //    messageData
- //   ).then(result => {
- //    if (result.status === 200) {
- //     setFormState(current => {
- //      return {
- //       ...current,
- //       submittedSuccessfully: true,
- //      };
- //     });
-
- //     setTimeout(() => {
- //      setFormState(current => {
- //       return {
- //        ...current,
- //        submitting: false,
- //        submittedSuccessfully: null,
- //       };
- //      });
-
- //      setMessageData(null);
- //     }, 2000);
- //    }
- //   });
- //  } else {
- //   setTimeout(() => {
- //    setFormState(current => {
- //     return {
- //      ...current,
- //      submitting: false,
- //      valuesMissing: false,
- //      submittedSuccessfully: null,
- //     };
- //    });
- //   }, 2000);
- //  }
- // };
 
  if (!productsList) {
   return <div>Loading...</div>;
@@ -131,9 +128,9 @@ const AddRecipe = () => {
    <Card>
     <input
      type="text"
-     value={name}
+     value={formData.name}
      onChange={event => {
-      setName(event.target.value);
+      handleSimpleInputChange("name", event.target.value);
      }}
      placeholder="Name"
     />
@@ -141,16 +138,16 @@ const AddRecipe = () => {
    <Card>
     <input
      type="text"
-     value={reference}
+     value={formData.reference}
      onChange={event => {
-      setReference(event.target.value);
+      handleSimpleInputChange("reference", event.target.value);
      }}
      placeholder="Reference"
     />
    </Card>
    <ul>
     <h2>Ingredients</h2>
-    {ingredients?.map((ingredient, index) => {
+    {formData.ingredients?.map((ingredient, index) => {
      return (
       <li key={index}>
        <Card direction="row">
@@ -158,27 +155,27 @@ const AddRecipe = () => {
          id={`${randomIdPrefix}-${index}`}
          value={ingredient.name}
          placeholder="Ingredient"
+         groupName="ingredients"
+         fieldName="name"
          options={productsList}
-         onInputChange={handleSuggestiveInputChange}
+         onInputChange={handleNestedInputChange}
         />
         <input
          type="number"
-         value={ingredient.quantity}
+         value={ingredient.quantity || ""}
          placeholder="Quantity [g]"
          onChange={event =>
-          setIngredients(current => {
-           const mutableIngredients = [...current];
-           mutableIngredients[index] = {
-            name: current[index].name,
-            quantity: event.target.value,
-           };
-           return mutableIngredients;
-          })
+          handleNestedInputChange(
+           event.target.value,
+           index,
+           "ingredients",
+           "quantity"
+          )
          }
         />
         <Button
          variant="negative"
-         onClick={() => handleRemove(index)}
+         onClick={() => handleRemove(index, "ingredients")}
         >
          Remove
         </Button>
@@ -186,33 +183,25 @@ const AddRecipe = () => {
       </li>
      );
     })}
-    <AddItemButton onClick={handleAdd} />
+    <AddItemButton onClick={() => handleAdd("ingredients")} />
    </ul>
    <ul>
     <h2>Steps</h2>
-    {steps.map((step, index) => {
+    {formData?.steps?.map((step, index) => {
      return (
       <li key={index}>
        <Card direction="row">
         <input
          value={step}
          placeholder="Step"
-         onChange={event => {
-          setSteps(current => {
-           const mutableSteps = [...current];
-           mutableSteps[index] = event.target.value;
-           return mutableSteps;
-          });
-         }}
+         onChange={event =>
+          handleNestedInputChange(event.target.value, index, "steps")
+         }
         />
         <Button
          variant="negative"
          onClick={() => {
-          setSteps(current => {
-           const mutableSteps = [...current];
-           mutableSteps.splice(index, 1);
-           return mutableSteps;
-          });
+          handleRemove(index, "steps");
          }}
         >
          Remove
@@ -221,13 +210,7 @@ const AddRecipe = () => {
       </li>
      );
     })}
-    <AddItemButton
-     onClick={() =>
-      setSteps(current => {
-       return [...current, ""];
-      })
-     }
-    />
+    <AddItemButton onClick={() => handleAdd("steps")} />
    </ul>
    <Button
     variant="neutral"

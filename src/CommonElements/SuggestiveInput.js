@@ -2,7 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import "./SuggestiveInput.css";
 
-const SuggestiveInput = ({ id, onInputChange, options, ...props }) => {
+const SuggestiveInput = ({
+ id,
+ onInputChange,
+ options,
+ groupName,
+ fieldName,
+ ...props
+}) => {
  const [inputPhrase, setInputPhrase] = useState("");
 
  const [listDown, setListDown] = useState(false);
@@ -16,8 +23,10 @@ const SuggestiveInput = ({ id, onInputChange, options, ...props }) => {
  }, [id]);
 
  useEffect(() => {
-  onInputChange({ index: id.split("-")[1], value: inputPhrase });
- }, [id, onInputChange, inputPhrase]);
+  if (groupName && fieldName) {
+   onInputChange(inputPhrase, id.split("-")[1], groupName, fieldName);
+  }
+ }, [id, onInputChange, inputPhrase, groupName, fieldName]);
 
  return (
   <div className="suggestive-input-wrapper">
