@@ -1,7 +1,5 @@
 Button onHover works poorly on mobile
 
-When added new row scroll appropriately and focus on input
-
 Clear fields on submit
 
 Scroll behavior on quanity fields is annoying
@@ -11,8 +9,6 @@ Error handling
 validation onblur
 
 Copy Settings from shoppin
-
-I think I need typescript
 
 useContext?
 
@@ -24,4 +20,6 @@ AddRecipe:
  -tags
  -Check if recipe name is already in use
  -create products that are not already in db
- - Improve suggestive field - not only starts with but also contains
+ - Scrolling to new row logic sloppy
+ - dropdownsHandle logic sloppy
+ - On submit scroll to top of the screen and focus on recipe name field

@@ -22,23 +22,24 @@ const AddRecipe = () => {
   handleNestedInputChange,
   handleAddRow,
   handleRemoveRow,
+  revertToInitialState,
  } = useFormData({
   ingredients: [{ name: "", quantity: "" }],
   steps: [""],
   name: "",
   reference: "",
+  notes: "",
  });
-
- const ingredientsCount = formData.ingredients.length;
 
  const formValidationCriteria = {
   name: validationCriteria.REQUIRED,
  };
 
- const [formState, handleSubmit] = useFormState(
+ const [formState, handleSubmit, dropdownsHandle] = useFormState(
   formData,
   `${process.env.REACT_APP_BACKEND_URL}/recipes/create`,
-  formValidationCriteria
+  formValidationCriteria,
+  revertToInitialState
  );
 
  const [productsList, setProductsList] = useState();
@@ -63,7 +64,15 @@ const AddRecipe = () => {
     event.target.click();
    }
   });
- }, []);
+
+  html.addEventListener("click", event => {
+   if (
+    !event.target.id.startsWith(`${randomIdPrefix}-ingredient`) &&
+    !event.target.className.startsWith("add-item-btn")
+   )
+    dropdownsHandle(false);
+  });
+ }, [dropdownsHandle]);
 
  useEffect(() => {
   const elementToFocus = document.getElementById(
@@ -137,6 +146,8 @@ const AddRecipe = () => {
            fieldName="name"
            options={productsList}
            onInputChange={handleNestedInputChange}
+           dropdownsHandle={dropdownsHandle}
+           listDown={formState.dropdowns[index]}
           />
           <label htmlFor={`${randomIdPrefix}-quantity-${index}`}></label>
           <input
@@ -206,6 +217,10 @@ const AddRecipe = () => {
       <textarea
        rows={3}
        id={`${randomIdPrefix}-notes`}
+       value={formData.notes}
+       onChange={event => {
+        handleSimpleInputChange("notes", event.target.value);
+       }}
       />
      </Card>
     </fieldset>

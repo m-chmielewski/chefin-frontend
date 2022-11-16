@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import "./SuggestiveInput.css";
 
 const SuggestiveInput = ({
  id,
  onInputChange,
+ dropdownsHandle,
+ listDown,
  options,
  groupName,
  fieldName,
  ...props
 }) => {
- const [listDown, setListDown] = useState(false);
-
- useEffect(() => {
-  const html = document.getElementsByTagName("html")[0];
-
-  html.addEventListener("click", event => {
-   if (event.target.id !== id) setListDown(false);
-  });
- }, [id]);
-
  return (
   <div className="suggestive-input-wrapper">
    <label htmlFor={id}>{props.label}</label>
@@ -31,11 +23,13 @@ const SuggestiveInput = ({
     onChange={event => {
      onInputChange(event.target.value, id.split("-")[2], groupName, fieldName);
     }}
-    onFocus={() => setListDown(true)}
+    onFocus={() => {
+     dropdownsHandle(true, id.split("-")[2]);
+    }}
    />
    <ul style={{ display: listDown ? "flex" : "none" }}>
     {options.map(option => {
-     if (option.toLowerCase().startsWith(props.value.toLowerCase()))
+     if (option.toLowerCase().includes(props.value.toLowerCase()))
       return (
        <li
         key={option}
@@ -45,7 +39,7 @@ const SuggestiveInput = ({
         onKeyDown={event => {
          if (event.key === "Enter") {
           onInputChange(option, id.split("-")[2], groupName, fieldName);
-          setListDown(false);
+          dropdownsHandle(false, id.split("-")[2]);
          }
         }}
         tabIndex={0}

@@ -62,11 +62,16 @@ export const useFormData = initialState => {
   });
  };
 
+ const revertToInitialState = () => {
+  setFormData(initialState);
+ };
+
  return {
   formData: formData,
   handleSimpleInputChange: handleSimpleInputChange,
   handleNestedInputChange: handleNestedInputChange,
   handleAddRow: handleAddRow,
   handleRemoveRow: handleRemoveRow,
+  revertToInitialState: revertToInitialState,
  };
 };
