@@ -29,9 +29,10 @@ const AddRecipe = () => {
   reference: "",
  });
 
+ const ingredientsCount = formData.ingredients.length;
+
  const formValidationCriteria = {
   name: validationCriteria.REQUIRED,
-  reference: validationCriteria.REQUIRED,
  };
 
  const [formState, handleSubmit] = useFormState(
@@ -48,7 +49,44 @@ const AddRecipe = () => {
   ).then(products => {
    setProductsList(products.data.map(product => product.name));
   });
+
+  const html = document.getElementsByTagName("html")[0];
+
+  html.addEventListener("keydown", event => {
+   if (
+    event.key === "Enter" &&
+    event.target.type !== "submit" &&
+    event.target.type !== "textarea"
+   ) {
+    event.preventDefault();
+
+    event.target.click();
+   }
+  });
  }, []);
+
+ useEffect(() => {
+  const elementToFocus = document.getElementById(
+   `${randomIdPrefix}-ingredient-${formData.ingredients.length - 1}`
+  );
+
+  focusOnAddedElement(elementToFocus);
+ }, [formData.ingredients.length]);
+
+ useEffect(() => {
+  const elementToFocus = document.getElementById(
+   `${randomIdPrefix}-step-${formData.steps.length - 1}`
+  );
+
+  focusOnAddedElement(elementToFocus);
+ }, [formData.steps.length]);
+
+ const focusOnAddedElement = element => {
+  if (element) {
+   element.scrollIntoView();
+   element.focus();
+  }
+ };
 
  if (!productsList) {
   return <div>Loading...</div>;
@@ -91,7 +129,7 @@ const AddRecipe = () => {
         <li key={index}>
          <Card>
           <SuggestiveInput
-           id={`${randomIdPrefix}-${index}`}
+           id={`${randomIdPrefix}-ingredient-${index}`}
            value={ingredient.name}
            placeholder="Ingredient"
            label="Ingredient name"
@@ -139,6 +177,7 @@ const AddRecipe = () => {
          <Card direction="row">
           <label htmlFor={`${randomIdPrefix}-step-${index}`}></label>
           <input
+           id={`${randomIdPrefix}-step-${index}`}
            value={step}
            placeholder="Step"
            onChange={event =>
@@ -159,6 +198,16 @@ const AddRecipe = () => {
       })}
       <AddItemButton onClick={() => handleAddRow("steps", "")} />
      </ul>
+    </fieldset>
+    <fieldset>
+     <legend>Notes</legend>
+     <Card>
+      <label htmlFor={`${randomIdPrefix}-notes`}>Notes</label>
+      <textarea
+       rows={3}
+       id={`${randomIdPrefix}-notes`}
+      />
+     </Card>
     </fieldset>
     <SubmitSection formState={formState} />
    </form>

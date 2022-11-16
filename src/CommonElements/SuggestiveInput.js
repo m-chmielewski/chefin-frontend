@@ -29,7 +29,7 @@ const SuggestiveInput = ({
     value={props.value}
     placeholder={props.placeholder}
     onChange={event => {
-     onInputChange(event.target.value, id.split("-")[1], groupName, fieldName);
+     onInputChange(event.target.value, id.split("-")[2], groupName, fieldName);
     }}
     onFocus={() => setListDown(true)}
    />
@@ -40,11 +40,11 @@ const SuggestiveInput = ({
        <li
         key={option}
         onClick={() => {
-         onInputChange(option, id.split("-")[1], groupName, fieldName);
+         onInputChange(option, id.split("-")[2], groupName, fieldName);
         }}
         onKeyDown={event => {
          if (event.key === "Enter") {
-          onInputChange(option, id.split("-")[1], groupName, fieldName);
+          onInputChange(option, id.split("-")[2], groupName, fieldName);
           setListDown(false);
          }
         }}

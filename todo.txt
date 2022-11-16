@@ -1,3 +1,9 @@
+Button onHover works poorly on mobile
+
+When added new row scroll appropriately and focus on input
+
+Clear fields on submit
+
 Scroll behavior on quanity fields is annoying
 
 Error handling
@@ -16,4 +22,6 @@ AddRecipe:
  -If I am only tabbing without pressing enter or clicking anywhere lists dont disappear
  -useReducer
  -tags
- -Check if name is already in use
+ -Check if recipe name is already in use
+ -create products that are not already in db
+ - Improve suggestive field - not only starts with but also contains

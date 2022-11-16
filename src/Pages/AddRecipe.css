@@ -14,7 +14,8 @@
  list-style: none;
 }
 
-.add-recipe input {
+.add-recipe input,
+.add-recipe textarea {
  flex: 1;
  color: inherit;
  font-family: inherit;
@@ -23,6 +24,10 @@
  border: 1px solid var(--input-border);
  background-color: var(--bg-1);
  padding: 0.25rem;
+}
+
+.add-recipe textarea {
+ resize: none;
 }
 
 .add-recipe.regular-vision .suggestive-input-wrapper {
