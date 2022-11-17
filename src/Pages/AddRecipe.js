@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-import { useFormState } from "../CommonElements/Hooks/useFormState";
-import { useFormData } from "../CommonElements/Hooks/useFormData";
-import { validationCriteria } from "../CommonElements/Utils/validator";
+import { useFormState } from "@mchm/common";
+import { useFormData } from "@mchm/common";
+import { validationCriteria } from "@mchm/common";
 import { PageContent } from "@mchm/common";
-import Card from "../CommonElements/Card";
-import SuggestiveInput from "../CommonElements/SuggestiveInput";
-import Button from "../CommonElements/Button";
-import AddItemButton from "../CommonElements/AddItemButton";
-import SubmitSection from "../CommonElements/SubmitSection";
+import { Card } from "@mchm/common";
+import { SuggestiveInput } from "@mchm/common";
+import { Button } from "@mchm/common";
+import { AddItemButton } from "@mchm/common";
+import { SubmitSection } from "@mchm/common";
 
 const randomIdPrefix = Date.now().toString(); //To stop browsers from making input suggestions
 

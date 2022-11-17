@@ -27,6 +27,7 @@ AddRecipe:
  - Scrolling to new row logic sloppy
  - dropdownsHandle logic sloppy
  - On submit scroll to top of the screen and focus on recipe name field
+ - Above conflicts with an idea to scroll to bottom of the screen to show form alert - lets replace form alart with some modal appearing as floating one
 
 Recipes:
  - Search
