@@ -7,7 +7,7 @@ import "./Recipe.css";
 import PageContent from "../CommonElements/PageContent";
 import Card from "../CommonElements/Card";
 
-const Recipe = () => {
+const Recipe = props => {
  const { name } = useParams();
 
  const [recipe, setRecipe] = useState();
@@ -23,7 +23,10 @@ const Recipe = () => {
  if (!recipe) return <div>Loading...</div>;
 
  return (
-  <PageContent className="recipe">
+  <PageContent
+   className="recipe"
+   regularVisionOn={props.regularVisionOn}
+  >
    <h1>{name}</h1>
    <h2>Ingredients</h2>
    <ul>

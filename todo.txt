@@ -8,7 +8,7 @@ validation onblur
 
 Copy Settings from shoppin
 
-useContext?
+useContext? - wouldnt it help with regular vision mode?
 
 step up export game
 
@@ -16,6 +16,7 @@ Ideas:
  - Add products to shopping list 
  - Servings calculator
  - Schedule
+ - For regular vision add side navigation
 
 AddRecipe:
  - If I am only tabbing without pressing enter or clicking anywhere lists dont disappear
@@ -32,6 +33,7 @@ Recipes:
 
 forRelease:
  - Settings
+ - Use local storage for regular vision info
  - Styling for regular vision
  - test on all screens
  - add recipes to prod db

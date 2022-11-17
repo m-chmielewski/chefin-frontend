@@ -4,7 +4,13 @@ import "./PageContent.css";
 
 const PageContent = props => {
  return (
-  <main className={`page-content ${props.className}`}>{props.children}</main>
+  <main
+   className={`page-content ${props.className} ${
+    props.regularVisionOn ? "regular-vision" : ""
+   }`}
+  >
+   {props.children}
+  </main>
  );
 };
 

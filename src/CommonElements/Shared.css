@@ -87,3 +87,7 @@ legend {
 label {
  display: none;
 }
+
+li {
+ list-style: none;
+}

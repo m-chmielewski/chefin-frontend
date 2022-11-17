@@ -4,7 +4,7 @@ import Axios from "axios";
 import PageContent from "../CommonElements/PageContent";
 import Button from "../CommonElements/Button";
 
-const Recipes = () => {
+const Recipes = props => {
  const [recipesList, setRecipesList] = useState();
 
  useEffect(() => {
@@ -16,7 +16,7 @@ const Recipes = () => {
  if (!recipesList) return <div>Loadin...</div>;
 
  return (
-  <PageContent>
+  <PageContent regularVisionOn={props.regularVisionOn}>
    <h1>Recipes</h1>
    <ul>
     {recipesList.map(recipe => {
