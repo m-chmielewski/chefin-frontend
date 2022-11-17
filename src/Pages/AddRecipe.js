@@ -4,7 +4,7 @@ import Axios from "axios";
 import { useFormState } from "../CommonElements/Hooks/useFormState";
 import { useFormData } from "../CommonElements/Hooks/useFormData";
 import { validationCriteria } from "../CommonElements/Utils/validator";
-import PageContent from "../CommonElements/PageContent";
+import { PageContent } from "@mchm/common";
 import Card from "../CommonElements/Card";
 import SuggestiveInput from "../CommonElements/SuggestiveInput";
 import Button from "../CommonElements/Button";

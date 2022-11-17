@@ -32,9 +32,6 @@ Recipes:
  - Search
 
 forRelease:
- - Settings
- - Use local storage for regular vision info
- - Styling for regular vision
  - test on all screens
  - add recipes to prod db
 

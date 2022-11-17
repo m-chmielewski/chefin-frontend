@@ -7,6 +7,7 @@ import Button from "../CommonElements/Button";
 const Settings = ({ regularVisionCallback, regularVisionOn }) => {
  return (
   <PageContent regularVisionOn={regularVisionOn}>
+   <h1>Settings</h1>
    <Card>
     <span>Low vision mode</span>
     <Button
