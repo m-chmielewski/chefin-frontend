@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-import "./AddRecipe.css";
-
 import { useFormState } from "../CommonElements/Hooks/useFormState";
 import { useFormData } from "../CommonElements/Hooks/useFormData";
 import { validationCriteria } from "../CommonElements/Utils/validator";
@@ -96,6 +94,10 @@ const AddRecipe = props => {
    element.focus();
   }
  };
+
+ useEffect(() => {
+  window.scrollTo(0, document.body.scrollHeight);
+ }, [formState.submitting]);
 
  if (!productsList) {
   return <div>Loading...</div>;

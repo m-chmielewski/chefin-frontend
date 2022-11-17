@@ -1,5 +1,9 @@
 .submit-section-wrapper {
  display: flex;
  flex-direction: column;
- gap: 0.3rem;
+ gap: var(--standard-gap);
+}
+
+.regular-vision .submit-section-wrapper {
+ gap: var(--regular-vision-gap);
 }

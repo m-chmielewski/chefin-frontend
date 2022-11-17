@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 
-import "./Recipe.css";
-
 import PageContent from "../CommonElements/PageContent";
 import Card from "../CommonElements/Card";
 

@@ -7,10 +7,18 @@ const Home = props => {
  return (
   <PageContent regularVisionOn={props.regularVisionOn}>
    <h1>Chefin</h1>
-   <Button href="/recipes/">Recipes</Button>
-   <Button href="/addRecipe/">Add Recipe</Button>
-   <Button href="/settings/">Settings</Button>
-   {/* <Button href="/editRecipe/">Edit recipe</Button> */}
+   <ul>
+    <li>
+     <Button href="/recipes/">Recipes</Button>
+    </li>
+    <li>
+     <Button href="/addRecipe/">Add Recipe</Button>
+    </li>
+    <li>
+     <Button href="/settings/">Settings</Button>
+    </li>
+    {/* <Button href="/editRecipe/">Edit recipe</Button> */}
+   </ul>
   </PageContent>
  );
 };

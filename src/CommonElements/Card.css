@@ -1,19 +1,16 @@
 .card {
  display: flex;
  flex-direction: column;
- gap: 0.3rem;
- padding: 0.3rem;
- border-radius: 0.3rem;
+ gap: var(--standard-gap);
+ padding: var(--standard-padding);
+ border-radius: var(--standard-padding);
  background-color: var(--bg-1);
 }
 
-.card.regular-vision {
- display: flex;
- flex-direction: column;
- flex-wrap: wrap;
- gap: 1rem;
- padding: 0.5rem;
- border-radius: 0.5rem;
+.regular-vision .card {
+ gap: var(--regular-vision-gap);
+ padding: var(--regular-vision-padding);
+ border-radius: var(--regular-vision-padding);
 }
 
 .card * {

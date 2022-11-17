@@ -37,3 +37,7 @@ forRelease:
  - Styling for regular vision
  - test on all screens
  - add recipes to prod db
+
+SuggestiveInput:
+ - scroll is ugly
+ - List looks weird
