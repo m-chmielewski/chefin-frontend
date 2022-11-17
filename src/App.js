@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./CommonElements/Shared.css";
 
+import { useRegularVision } from "./CommonElements/Hooks/useRegularVision";
 import Home from "./Pages/Home";
 import Recipes from "./Pages/Recipes";
 import Recipe from "./Pages/Recipe";
@@ -10,42 +11,8 @@ import AddRecipe from "./Pages/AddRecipe";
 import EditRecipe from "./Pages/EditRecipe";
 import Settings from "./Pages/Settings";
 
-const getInitialRegularVision = () => {
- const currentSetting = localStorage.regularVision;
- const rootElement = document.getElementsByTagName("html")[0];
-
- if (!currentSetting || currentSetting === "on") {
-  rootElement.style.fontSize = "12pt";
-  return true;
- } else {
-  rootElement.style.fontSize = "42pt";
-  return false;
- }
-};
-
 const App = () => {
- const [regularVisionOn, setRegularVisionOn] = useState(
-  getInitialRegularVision()
- );
-
- const handleRegularVisionSwitch = () => {
-  const currentSetting = localStorage.regularVision;
-
-  if (currentSetting === "on") {
-   localStorage.regularVision = "off";
-   setRegularVisionOn(false);
-  } else {
-   localStorage.regularVision = "on";
-   setRegularVisionOn(true);
-  }
- };
-
- useEffect(() => {
-  const rootElement = document.getElementsByTagName("html")[0];
-  regularVisionOn
-   ? (rootElement.style.fontSize = "12pt")
-   : (rootElement.style.fontSize = "42pt");
- }, [regularVisionOn]);
+ const [regularVisionOn, regularVisionSwitch] = useRegularVision();
 
  return (
   <Router>
@@ -75,7 +42,7 @@ const App = () => {
      element={
       <Settings
        regularVisionOn={regularVisionOn}
-       regularVisionCallback={handleRegularVisionSwitch}
+       regularVisionCallback={regularVisionSwitch}
       />
      }
     />
