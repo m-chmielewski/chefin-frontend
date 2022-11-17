@@ -12,3 +12,9 @@
  margin: 0 auto;
  padding: 1rem 0;
 }
+
+.page-content > ul {
+ display: flex;
+ flex-direction: column;
+ gap: 0.3rem;
+}

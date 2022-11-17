@@ -1,7 +1,5 @@
 Button onHover works poorly on mobile
 
-Clear fields on submit
-
 Scroll behavior on quanity fields is annoying
 
 Error handling
@@ -14,12 +12,26 @@ useContext?
 
 step up export game
 
+Ideas:
+ - Add products to shopping list 
+ - Servings calculator
+ - Schedule
+
 AddRecipe:
- -If I am only tabbing without pressing enter or clicking anywhere lists dont disappear
- -useReducer
- -tags
- -Check if recipe name is already in use
- -create products that are not already in db
+ - If I am only tabbing without pressing enter or clicking anywhere lists dont disappear
+ - useReducer
+ - tags
+ - Check if recipe name is already in use
+ - create products that are not already in db
  - Scrolling to new row logic sloppy
  - dropdownsHandle logic sloppy
  - On submit scroll to top of the screen and focus on recipe name field
+
+Recipes:
+ - Search
+
+forRelease:
+ - Settings
+ - Styling for regular vision
+ - test on all screens
+ - add recipes to prod db

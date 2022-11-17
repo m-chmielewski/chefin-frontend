@@ -8,11 +8,17 @@
  font-weight: inherit;
  font-family: inherit;
  font-size: inherit;
+ text-align: center;
+ padding: 0.3rem;
+ border: 2px solid transparent;
+ border-radius: 0.3rem;
+ cursor: pointer;
+}
+
+.btn.regular-vision {
  padding: 0.25rem 1rem;
  border: 2px solid transparent;
  border-radius: 0.25rem;
- text-align: center;
- cursor: pointer;
 }
 
 .btn.nav {
@@ -20,6 +26,7 @@
  justify-content: space-between;
  align-items: center;
  background-color: var(--bg-1);
+ text-align: start;
 }
 
 .btn.neutral {
