@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-import { useFormState } from "@mchm/common";
-import { useFormData } from "@mchm/common";
+import { useFormData, useFormState } from "@mchm/common";
 import { validationCriteria } from "@mchm/common";
-import { PageContent } from "@mchm/common";
-import { Card } from "@mchm/common";
-import { SuggestiveInput } from "@mchm/common";
-import { Button } from "@mchm/common";
-import { AddItemButton } from "@mchm/common";
-import { SubmitSection } from "@mchm/common";
+import {
+ AddItemButton,
+ Button,
+ Card,
+ PageContent,
+ SubmitSection,
+ SuggestiveInput,
+} from "@mchm/common";
 
 const randomIdPrefix = Date.now().toString(); //To stop browsers from making input suggestions
 
