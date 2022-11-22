@@ -1,11 +1,10 @@
 import React from "react";
 
-import PageContent from "../CommonElements/PageContent";
-import Button from "../CommonElements/Button";
+import { Button, PageContent } from "@mchm/common";
 
-const Home = props => {
+const Home = () => {
  return (
-  <PageContent regularVisionOn={props.regularVisionOn}>
+  <PageContent>
    <h1>Chefin</h1>
    <ul>
     <li>

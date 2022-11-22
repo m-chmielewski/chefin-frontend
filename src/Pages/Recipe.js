@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 
-import PageContent from "../CommonElements/PageContent";
-import Card from "../CommonElements/Card";
+import { Card, PageContent } from "@mchm/common";
 
-const Recipe = props => {
+const Recipe = () => {
  const { name } = useParams();
 
  const [recipe, setRecipe] = useState();
@@ -21,10 +20,7 @@ const Recipe = props => {
  if (!recipe) return <div>Loading...</div>;
 
  return (
-  <PageContent
-   className="recipe"
-   regularVisionOn={props.regularVisionOn}
-  >
+  <PageContent>
    <h1>{name}</h1>
    <h2>Ingredients</h2>
    <ul>
@@ -44,10 +40,7 @@ const Recipe = props => {
      <h2>Steps</h2>
      <ul>
       <li>
-       <Card>
-        Marinate meat in garlic, soy sauce, olive oil, rosemary, carrot, white
-        wine
-       </Card>
+       <Card></Card>
       </li>
      </ul>
     </>

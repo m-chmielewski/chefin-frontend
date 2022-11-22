@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-import { useFormState } from "../CommonElements/Hooks/useFormState";
-import { useFormData } from "../CommonElements/Hooks/useFormData";
-import { validationCriteria } from "../CommonElements/Utils/validator";
-import { PageContent } from "@mchm/common";
-import Card from "../CommonElements/Card";
-import SuggestiveInput from "../CommonElements/SuggestiveInput";
-import Button from "../CommonElements/Button";
-import AddItemButton from "../CommonElements/AddItemButton";
-import SubmitSection from "../CommonElements/SubmitSection";
+import { useFormData, useFormState } from "@mchm/common";
+import { validationCriteria } from "@mchm/common";
+import {
+ AddItemButton,
+ Button,
+ Card,
+ PageContent,
+ SubmitSection,
+ SuggestiveInput,
+} from "@mchm/common";
 
 const randomIdPrefix = Date.now().toString(); //To stop browsers from making input suggestions
 
-const AddRecipe = props => {
+const AddRecipe = () => {
  const {
   formData,
   handleSimpleInputChange,
@@ -104,10 +105,7 @@ const AddRecipe = props => {
  }
 
  return (
-  <PageContent
-   className="add-recipe"
-   regularVisionOn={props.regularVisionOn}
-  >
+  <PageContent>
    <h1>Add recipe</h1>
    <form onSubmit={event => handleSubmit(event)}>
     <fieldset>

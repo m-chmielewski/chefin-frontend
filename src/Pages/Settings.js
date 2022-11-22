@@ -1,18 +1,16 @@
 import React from "react";
 
-import PageContent from "../CommonElements/PageContent";
-import Card from "../CommonElements/Card";
-import Button from "../CommonElements/Button";
+import { PageContent, Card, Button } from "@mchm/common";
 
-const Settings = ({ regularVisionCallback, regularVisionOn }) => {
+const Settings = ({ regularVisionSwitch, regularVisionOn }) => {
  return (
-  <PageContent regularVisionOn={regularVisionOn}>
+  <PageContent>
    <h1>Settings</h1>
    <Card>
     <span>Low vision mode</span>
     <Button
      variant={`${regularVisionOn ? "positive" : "negative"}`}
-     onClick={() => regularVisionCallback()}
+     onClick={() => regularVisionSwitch()}
     >
      Turn {regularVisionOn ? "on" : "off"}
     </Button>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import PageContent from "../CommonElements/PageContent";
+import { PageContent } from "@mchm/common";
 
 const EditRecipe = () => {
  return (
