@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-import PageContent from "../CommonElements/PageContent";
-import Button from "../CommonElements/Button";
+import { Button, PageContent } from "@mchm/common";
 
-const Recipes = props => {
+const Recipes = () => {
  const [recipesList, setRecipesList] = useState();
 
  useEffect(() => {
@@ -16,7 +15,7 @@ const Recipes = props => {
  if (!recipesList) return <div>Loadin...</div>;
 
  return (
-  <PageContent regularVisionOn={props.regularVisionOn}>
+  <PageContent>
    <h1>Recipes</h1>
    <ul>
     {recipesList.map(recipe => {

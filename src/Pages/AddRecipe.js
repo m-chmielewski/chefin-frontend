@@ -14,7 +14,7 @@ import {
 
 const randomIdPrefix = Date.now().toString(); //To stop browsers from making input suggestions
 
-const AddRecipe = props => {
+const AddRecipe = () => {
  const {
   formData,
   handleSimpleInputChange,
@@ -105,10 +105,7 @@ const AddRecipe = props => {
  }
 
  return (
-  <PageContent
-   className="add-recipe"
-   regularVisionOn={props.regularVisionOn}
-  >
+  <PageContent>
    <h1>Add recipe</h1>
    <form onSubmit={event => handleSubmit(event)}>
     <fieldset>
