@@ -1,13 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
-import { Card, PageContent } from "@mchm/common";
+import { Card, EllipsisButton, PageContent } from "@mchm/common";
 
 const Recipe = () => {
  const { name } = useParams();
 
+ const navigateTo = useNavigate();
+
  const [recipe, setRecipe] = useState();
+
+ const ingredientsEllipsisOptions = [
+  {
+   name: "Add to shopping list",
+   action: () => navigateTo(`/recipe/addToShoppingList/${name}`),
+  },
+  {
+   name: "Edit",
+   action: () => null,
+  },
+ ];
 
  useEffect(() => {
   Axios.get(`${process.env.REACT_APP_BACKEND_URL}/recipes/${name}`).then(
@@ -15,14 +28,17 @@ const Recipe = () => {
     setRecipe(response.data);
    }
   );
- }, []);
+ }, [name]);
 
  if (!recipe) return <div>Loading...</div>;
 
  return (
   <PageContent>
    <h1>{name}</h1>
-   <h2>Ingredients</h2>
+   <div className="section-heading">
+    <h2>Ingredients</h2>
+    <EllipsisButton options={ingredientsEllipsisOptions} />
+   </div>
    <ul>
     {recipe.ingredients.map(ingredient => {
      return (

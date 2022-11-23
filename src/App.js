@@ -7,6 +7,7 @@ import { StylingProvider } from "@mchm/common";
 import Home from "./Pages/Home";
 import Recipes from "./Pages/Recipes";
 import Recipe from "./Pages/Recipe";
+import AddToShoppingList from "./Pages/AddToShoppingList";
 import AddRecipe from "./Pages/AddRecipe";
 import EditRecipe from "./Pages/EditRecipe";
 import Settings from "./Pages/Settings";
@@ -29,6 +30,10 @@ const App = () => {
      <Route
       path="/recipe/:name"
       element={<Recipe />}
+     />
+     <Route
+      path="/recipe/addToShoppingList/:name"
+      element={<AddToShoppingList />}
      />
      <Route
       path="/addRecipe/"
