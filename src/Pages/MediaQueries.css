@@ -1,0 +1,31 @@
+@media (max-width: 649px) {
+ .page-content {
+  margin: var(--standard-padding);
+ }
+
+ .ellipsis-btn-wrapper .overlay {
+  width: 70vw;
+ }
+}
+
+@media (min-width: 650px) {
+ .page-content {
+  max-width: 600px;
+  margin: var(--standard-padding) auto;
+ }
+
+ .ellipsis-btn-wrapper .overlay {
+  width: 500px;
+ }
+}
+
+@media (min-width: 1920px) {
+ .page-content {
+  max-width: 900px;
+  margin: var(--standard-padding) auto;
+ }
+
+ .ellipsis-btn-wrapper .overlay {
+  width: 700px;
+ }
+}

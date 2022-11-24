@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
-import { Card, EllipsisButton, PageContent } from "@mchm/common";
+import { ActiveHeading, Card, PageContent } from "@mchm/common";
 
 const Recipe = () => {
  const { name } = useParams();
@@ -11,7 +11,7 @@ const Recipe = () => {
 
  const [recipe, setRecipe] = useState();
 
- const ingredientsEllipsisOptions = [
+ const ingredientsMenuItems = [
   {
    name: "Add to shopping list",
    action: () => navigateTo(`/recipe/addToShoppingList/${name}`),
@@ -35,10 +35,9 @@ const Recipe = () => {
  return (
   <PageContent>
    <h1>{name}</h1>
-   <div className="section-heading">
+   <ActiveHeading menuItems={ingredientsMenuItems}>
     <h2>Ingredients</h2>
-    <EllipsisButton options={ingredientsEllipsisOptions} />
-   </div>
+   </ActiveHeading>
    <ul>
     {recipe.ingredients.map(ingredient => {
      return (

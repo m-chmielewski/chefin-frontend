@@ -9,7 +9,7 @@ import { PageContent, SelectableCard, SubmitSection } from "@mchm/common";
 const AddToShoppingList = () => {
  const { name } = useParams();
 
- const { formData, handleArrayChange } = useFormData({
+ const { formData, handleArrayChange, revertToInitialState } = useFormData({
   selectedIngredients: [],
  });
 
@@ -19,8 +19,9 @@ const AddToShoppingList = () => {
 
  const [formState, handleSubmit] = useFormState(
   formData,
-  `${process.env.REACT_APP_SHOPPIN_BACKEND_URL}/addToList`,
-  formValidationCriteria
+  `${process.env.REACT_APP_SHOPPIN_BACKEND_URL}/list/addFromRecipe`,
+  formValidationCriteria,
+  revertToInitialState
  );
 
  const [ingredients, setIngredients] = useState();

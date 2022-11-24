@@ -6,14 +6,11 @@ Error handling
 
 validation onblur
 
-Copy Settings from shoppin
-
 useContext? - wouldnt it help with regular vision mode?
 
 step up export game
 
 Ideas:
- - Add products to shopping list 
  - Servings calculator
  - Schedule
  - For regular vision add side navigation
@@ -39,3 +36,6 @@ forRelease:
 SuggestiveInput:
  - scroll is ugly
  - List looks weird
+
+Recipe:
+ - How to open AddToShoppingList without retrieving ingredients from backend again
